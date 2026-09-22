@@ -1,0 +1,25 @@
+name: OIDC test
+on:
+    workflow_dispatch:
+permissions:
+    contents: read
+    id-token: write
+
+jobs:
+    aws_authentication:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+            - name: Configure aws creds
+              uses: aws-actions/configure-aws-credentials@v6
+              with:
+                role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+                aws-region: ap-south-1
+                role-session-name: github-access-connection
+            
+            - name: verify aws authentication
+              run: |
+                aws sts get-caller-identity
+
+
