@@ -22,7 +22,7 @@ jobs:
                 java -version
                 mvn -version
             - name: Build with maven
-              run: mvn clean oackage
+              run: mvn clean package
             - name: Verify jar file
               run: |
                 ls -l target/*.jar
@@ -38,4 +38,3 @@ jobs:
               with:
                 name: streamflix-deployment
                 path: eb-deployment
-                
